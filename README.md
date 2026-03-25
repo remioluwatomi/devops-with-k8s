@@ -6,3 +6,5 @@
 [1.2](https://github.com/remioluwatomi/devops-with-k8s/tree/1.2)
 
 [1.3](https://github.com/remioluwatomi/devops-with-k8s/tree/1.3)
+
+[1.4](https://github.com/remioluwatomi/devops-with-k8s/tree/1.4)
