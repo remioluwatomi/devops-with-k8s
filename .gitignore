@@ -1,0 +1,14 @@
+# -------------------
+# .NET
+# -------------------
+TaskPod/bin/
+TaskPod/obj/
+TaskPod/appsettings.Development.json
+
+# -------------------
+# Go
+# -------------------
+log-output/bin/
+log-output/*.exe
+log-output/*.test
+
