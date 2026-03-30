@@ -14,5 +14,8 @@ spec:
     spec:
       containers:
         - name: task-pod
-          image: remioluwatomi/task-pod:1.0
+          image: remioluwatomi/task-pod:1.1
+          envFrom:
+          - configMapRef:
+              name: taskpod-config
 

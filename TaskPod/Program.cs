@@ -10,6 +10,15 @@ builder.WebHost.ConfigureKestrel(options =>
 
 var app = builder.Build();
 Console.WriteLine($"Server started in port {port}");
-app.MapGet("/", () => "Hello world!");
+app.MapGet("/", () =>
+{
+    return Results.Json(
+        new
+        {
+            message = "Hello word",
+            status = "success"
+        }
+    );
+});
 
 app.Run();
