@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: hashgenerator
-          image: remioluwatomi/log-output:1.0
+          image: remioluwatomi/log-output:1.1
