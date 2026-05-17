@@ -5,6 +5,8 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"flag"
+	"time"
+
 	// "fmt"
 	"log"
 	"net/http"
@@ -30,14 +32,19 @@ func init() {
 func main() {
 	processHash := generateHash()
 
-	type RequestResponse struct {
+	type HashResponse struct {
 		ApplicationHash string `json:"appHash"`
 		RequestHash     string `json:"reqHash"`
 	}
 
+	type TimestampResponse struct {
+		ApplicationHash string `json:"appHash"`
+		Timestamp       string `json:"timestamp"`
+	}
+
 	hashHandler := func(w http.ResponseWriter, req *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
-		hashRes := RequestResponse{
+		hashRes := HashResponse{
 			ApplicationHash: processHash,
 			RequestHash:     generateHash(),
 		}
@@ -50,8 +57,22 @@ func main() {
 		}
 
 	}
+	timestampHandler := func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		timestampResponse := TimestampResponse{
+			ApplicationHash: processHash,
+			Timestamp:       time.Now().Format(time.RFC822),
+		}
+
+		err := json.NewEncoder(w).Encode(timestampResponse)
+		if err != nil {
+			http.Error(w, "failed to encode response", http.StatusInternalServerError)
+			return
+		}
+	}
 
 	http.HandleFunc("/hash", hashHandler)
+	http.HandleFunc("/timestamp", timestampHandler)
 	log.Fatal(http.ListenAndServe(":"+strconv.Itoa(hashPort), nil))
 
 }
