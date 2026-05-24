@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: pong-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pong-server
+  template:
+    metadata:
+      labels:
+        app: pong-server
+    spec:
+      containers:
+        - name: pong-server
+          image: remioluwatomi/pong-server:1.1
+          envFrom:
+          - configMapRef:
+              name: pong-server-config
+
